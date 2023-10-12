@@ -1,13 +1,13 @@
 const express = require('express');
-const morgan = require('morgan');
 const cors = require('cors');
 
 const app = express();
+const logger = require('./utils/logging');
 
 const PORT = process.env.PORT || 8080;
 
 
-app.use(morgan('dev'));
+app.use(logger);
 app.use(cors());
 app.use(express.json());
 
