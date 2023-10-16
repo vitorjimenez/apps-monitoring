@@ -1,21 +1,20 @@
 const axios = require('axios');
-const { sendDiscordNotification } = require('../services/webhooks');
+const {sendDiscordNotification} = require('../services/webhooks');
 
 jest.mock('axios');
 
 describe('sendDiscordNotification', () => {
-
     afterEach(() => {
         axios.post.mockReset();
     });
 
     it('should send a notification to Discord', async () => {
-        const error = new Error("This is a test error");
-        error.stack = "Error: This is a test error\n at Object.<anonymous> (path/to/file.js:10:10)";
+        const error = new Error('This is a test error');
+        error.stack = 'Error: This is a test error\n at Object.<anonymous> (path/to/file.js:10:10)';
         error.method = 'GET';
         error.url = '/test-endpoint';
 
-        axios.post.mockResolvedValue({ status: 200 });
+        axios.post.mockResolvedValue({status: 200});
 
         await sendDiscordNotification(error);
 
@@ -23,8 +22,8 @@ describe('sendDiscordNotification', () => {
     });
 
     it('should handle errors from axios', async () => {
-        const error = new Error("This is a test error");
-        error.stack = "Error: This is a test error\n at Object.<anonymous> (path/to/file.js:10:10)";
+        const error = new Error('This is a test error');
+        error.stack = 'Error: This is a test error\n at Object.<anonymous> (path/to/file.js:10:10)';
         error.method = 'GET';
         error.url = '/test-endpoint';
 
