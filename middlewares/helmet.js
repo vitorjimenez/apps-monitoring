@@ -4,14 +4,14 @@ const secureHeaders = () => {
     return helmet({
         contentSecurityPolicy: {
             directives: {
-                defaultSrc: ["'self'"],
-                styleSrc: ["'self'", "'unsafe-inline'"], 
-                mediaSrc: ["'self'"],
-                frameSrc: ["'none'"], 
+                defaultSrc: ['\'self\''],
+                styleSrc: ['\'self\'', '\'unsafe-inline\''],
+                mediaSrc: ['\'self\''],
+                frameSrc: ['\'none\''],
             },
         },
         dnsPrefetchControl: false,
-        frameguard: { action: 'deny' },
+        frameguard: {action: 'deny'},
         hidePoweredBy: true,
     });
 };

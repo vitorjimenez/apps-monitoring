@@ -1,4 +1,4 @@
-const { sendDiscordNotification } = require('../services/webhooks');
+const {sendDiscordNotification} = require('../services/webhooks');
 
 const errorHandlerMiddleware = (err, req, res, next) => {
     console.error(`Erro ocorrido em ${req.method} ${req.url} : ${err.message}`);
@@ -7,7 +7,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
 
     sendDiscordNotification(err);
 
-    res.status(500).send({ error: 'Ocorreu um erro inesperado!' });
+    res.status(500).send({error: 'Ocorreu um erro inesperado!'});
 };
 
 module.exports = errorHandlerMiddleware;
