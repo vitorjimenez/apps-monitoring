@@ -12,7 +12,7 @@ const router = express.Router();
  */
 router.get('/diag', (req, res) => {
     res.json({
-        message: 'api-up'
+        message: 'api-up',
     });
 });
 
