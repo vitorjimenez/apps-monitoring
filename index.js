@@ -1,28 +1,28 @@
 const express = require('express');
 const cors = require('cors');
-const logger = require('./utils/logging');
 const figlet = require('figlet');
+const logger = require('./utils/logging');
+const secureHeaders = require('./middlewares/helmet')
 const routes = require('./routers/routes');
-const connectDB = require('./database/connection')
+const connectDB = require('./database/connection');
+const setupSwagger = require('./utils/docs');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-connectDB()
+setupSwagger(app);  // Aplicação da configuração do Swagger na app Express
+
+connectDB();
 
 app.use(logger);
-app.use('/api', routes); //Prefixo de todos os endpoints
+app.use(secureHeaders())
 app.use(cors());
 app.use(express.json());
-
-app.get('/', (req, res) => {
-    res.json({ message: 'api-up'})
-});
+app.use('/api', routes);
 
 app.listen(PORT, () => {
-    console.log(figlet.textSync("ops-monitoring",{horizontalLayout: 'full'}));   
+    console.log(figlet.textSync("ops-monitoring", { horizontalLayout: 'full' }));
     console.log(`Servidor rodando na porta ${PORT}`);
 });
 
 module.exports = app;
-
